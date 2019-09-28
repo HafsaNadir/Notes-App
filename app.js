@@ -7,19 +7,19 @@ yargs.command({
     describe: 'adding a new note',
     builder: {
         title: {
-            describe: 'note title',
+            describe: 'add command title',
             demandOption: true,
             type: 'string',
         },
 
         body: {
-            describe: 'note body',
+            describe: 'add command body',
             demandOption: true,
             type: 'string'
         }
     },
     handler: function(argv){
-        notes(argv.title, argv.body)
+        notes.addNotes(argv.title, argv.body)
     }
 })
 
@@ -27,8 +27,15 @@ yargs.command({
 yargs.command({
     command: 'remove',
     describe: 'removing a note',
-    handler: function(){
-        console.log('removing a note')
+    builder: {
+        title: {
+            describe: 'remove command title',
+            demandOption: true,
+            type: 'string'
+        }
+    },
+    handler: function(argv){
+        notes.removeNotes(argv.title)
     }
 })
 

@@ -1,5 +1,6 @@
 const fs = require('fs')
 
+//adding a note
 const addNotes = (title,body) => {
     const notes = loadNotes()
     
@@ -19,12 +20,20 @@ const addNotes = (title,body) => {
     }
     
 }
+//removing a note
+const removeNotes = (title) => {
+    notes = loadNotes()
+    keepNotes = notes.filter(note => note.title !== title)
+    saveNotes(keepNotes)
+}
 
+//saving notes
 const saveNotes = (notes) => {
     dataJson = JSON.stringify(notes)
     fs.writeFileSync('notes.json', dataJson)
 }
 
+//loading notes
 const loadNotes = () => {
     try {
         const dataBuffer = fs.readFileSync('notes.json')
@@ -35,4 +44,5 @@ const loadNotes = () => {
         return []
     }
 }
-module.exports= addNotes
+
+module.exports= { addNotes, removeNotes} 
