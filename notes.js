@@ -42,6 +42,19 @@ const listNotes = () => {
     notes.map(note => console.log(note.title))
 }
 
+//reading a note 
+const readNotes = (title) => {
+    notes = loadNotes()
+    noteToRead = notes.find(note => note.title === title)
+    if (noteToRead){
+        console.log(chalk.inverse('Title: ' + noteToRead.title))
+        console.log(chalk.blue.inverse('Description: ' + noteToRead.body))
+    } 
+    else{
+        console.log(chalk.red.inverse('No note found'))
+    }
+}
+
 //saving notes
 const saveNotes = (notes) => {
     dataJson = JSON.stringify(notes)
@@ -60,4 +73,4 @@ const loadNotes = () => {
     }
 }
 
-module.exports = { addNotes, removeNotes, listNotes }
+module.exports = { addNotes, removeNotes, listNotes, readNotes}
