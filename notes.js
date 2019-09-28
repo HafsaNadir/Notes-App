@@ -1,14 +1,14 @@
 const fs = require('fs')
-const chalk=  require('chalk')
+const chalk = require('chalk')
 
 //adding a note
-const addNotes = (title,body) => {
+const addNotes = (title, body) => {
     const notes = loadNotes()
-    
+
     const duplicateNotes = notes.find((note) => note.title === title)
     console.log(duplicateNotes)
-    
-    if(!duplicateNotes) {
+
+    if (!duplicateNotes) {
         notes.push({
             title,
             body
@@ -18,21 +18,21 @@ const addNotes = (title,body) => {
     }
     else {
         console.log(chalk.red.inverse('This note already exist'))
-    }    
+    }
 }
 
 //removing a note
 const removeNotes = (title) => {
     notes = loadNotes()
     keepNotes = notes.filter(note => note.title !== title)
-    
-    if(notes.length > keepNotes.length){
+
+    if (notes.length > keepNotes.length) {
         console.log(chalk.blue.inverse('Note removed'))
         saveNotes(keepNotes)
     }
     else {
         console.log(chalk.red.inverse('No note found'))
-    }    
+    }
 }
 
 //listing notes
@@ -46,11 +46,11 @@ const listNotes = () => {
 const readNotes = (title) => {
     notes = loadNotes()
     noteToRead = notes.find(note => note.title === title)
-    if (noteToRead){
+    if (noteToRead) {
         console.log(chalk.inverse('Title: ' + noteToRead.title))
         console.log(chalk.blue.inverse('Description: ' + noteToRead.body))
-    } 
-    else{
+    }
+    else {
         console.log(chalk.red.inverse('No note found'))
     }
 }
@@ -68,9 +68,9 @@ const loadNotes = () => {
         dataJson = dataBuffer.toString()
         return JSON.parse(dataJson)
     }
-    catch(error) {
+    catch (error) {
         return []
     }
 }
 
-module.exports = { addNotes, removeNotes, listNotes, readNotes}
+module.exports = { addNotes, removeNotes, listNotes, readNotes }
